@@ -25,6 +25,9 @@ log_opts = [
                default="info",
                help='log level NOTSET/DEBUG/INFO/WARNING/ERROR/CRITICAL'
                ),
+    cfg.StrOpt('log_file',
+               default="",
+               help="log file")
 ]
 
 
@@ -36,4 +39,4 @@ def init_config():
     CONF(args=argv[1:],
          project='resource_manager',
          version="0.0.1",
-         default_config_files=["/etc/resource_manager.conf"])
+         default_config_files=["./conf/resource_manager.conf"])

@@ -8,7 +8,10 @@ CONF = cfg.CONF
 formetter_str = '[%(worker_name)s] %(asctime)s %(levelname)s pid=%(process)d: ' \
                 '%(message)s %(funcName)s %(pathname)s:%(lineno)d'
 formatter = logging.Formatter(formetter_str)
-console_handler = logging.StreamHandler(sys.stdout)
+if CONF.log.log_file == "":
+    console_handler = logging.StreamHandler(sys.stdout)
+else:
+    console_handler = logging.FileHandler(CONF.log.log_file)
 console_handler.formatter = formatter
 
 log_levels = {

@@ -11,8 +11,11 @@ def init_db(conf):
 
 
 def create_app(conf):
+    from .common.log import get_logger
+    log = get_logger()
     app = Flask(__name__)
     from .api import api as api_blueprint
     app.register_blueprint(api_blueprint)
     init_db(conf)
+    log.info("app start...")
     return app
