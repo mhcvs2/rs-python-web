@@ -1,0 +1,9 @@
+.idea/
+*.pyc
+*.so
+build/
+*.mp3
+*.raw
+*.wav
+*.o
+venv/
