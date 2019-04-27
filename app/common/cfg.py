@@ -30,12 +30,19 @@ log_opts = [
                help="log file")
 ]
 
+project_opts = [
+    cfg.StrOpt('base_url',
+               default="",
+               help='project service url'),
+]
+
 
 def init_config():
     argv = sys.argv
     CONF.register_opts(database_opts, 'database')
     CONF.register_opts(log_opts, 'log')
     CONF.register_opts(server_opts, 'server')
+    CONF.register_opts(project_opts, 'project_service')
     CONF(args=argv[1:],
          project='resource_manager',
          version="0.0.1",

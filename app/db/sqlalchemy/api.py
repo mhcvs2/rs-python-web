@@ -158,4 +158,3 @@ def db_reset(options, *plugins):
     drop_db(options)
     db_sync(options)
     configure_db(options)
-

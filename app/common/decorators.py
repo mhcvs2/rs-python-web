@@ -1,3 +1,4 @@
+# encoding: utf-8
 from functools import wraps
 from validator import validate as validator_validate
 from flask import jsonify, wrappers, request
@@ -22,13 +23,20 @@ def _get_view_data_by_collection(view_class, collection):
     res = []
     for r in collection:
         res.append(view_class(r).data())
-    result_data = {
-        '{}s'.format(getattr(view_class, 'name')): res
-    }
+    if hasattr(view_class, 'name'):
+        result_data = {
+            '{}s'.format(getattr(view_class, 'name')): res
+        }
+    else:
+        result_data = res
     return result_data
 
 
 def simple_to_view(view_class):
+    """
+    :param view_class: view class
+    :return: flask json response
+    """
     def decorator(decorated):
         @wraps(decorated)
         def inner(*args, **kwargs):
