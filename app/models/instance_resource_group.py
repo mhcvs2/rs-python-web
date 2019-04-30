@@ -1,14 +1,11 @@
 # coding: utf-8
 from sqlalchemy import Column, DateTime, String, TIMESTAMP, text
 from sqlalchemy.dialects.mysql import BIGINT, INTEGER, SMALLINT
-from sqlalchemy.ext.declarative import declarative_base
 from app import db
-
-Base = declarative_base()
-metadata = Base.metadata
+from . import BaseModel
 
 
-class InstanceResourceGroup(Base):
+class InstanceResourceGroup(BaseModel, db.Model):
     __tablename__ = 'instance_resource_group'
     _data_fields = ['id', 'user_id', 'region_code', 'product_type_id', 'gp_name', 'item_no', 'value_max',
                     'value_min', 'description', 'status', 'create_time', 'update_time', 'resource_conf',
@@ -30,7 +27,3 @@ class InstanceResourceGroup(Base):
     is_default = Column(INTEGER(11), server_default=text("'0'"))
     value_dev = Column(INTEGER(11))
     value_prod = Column(INTEGER(11))
-
-    @staticmethod
-    def get_by_id(group_id):
-        return db.session.query(InstanceResourceGroup).filter_by(id=group_id).first()
