@@ -1,10 +1,12 @@
 from flask import Flask
 from .db import get_db_api
+from flask_sqlalchemy import SQLAlchemy
 from flask_cache import Cache
 from config import Config
 
 
 cache = Cache()
+db = SQLAlchemy()
 
 
 def init_db(conf):
@@ -24,5 +26,6 @@ def create_app(conf):
     app.register_blueprint(api_blueprint)
     init_db(conf)
     cache.init_app(app)
+    db.init_app(app)
     log.info("app start...")
     return app

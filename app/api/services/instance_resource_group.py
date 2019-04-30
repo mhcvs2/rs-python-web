@@ -4,6 +4,7 @@ from app.db.data_models.instance_resource_group import DBInstanceResourceGroup
 from app.api.views.instance_resource_group import InstanceResourceGroupView
 from app.common.decorators import simple_to_view, handle_exception
 from app.common.response import Response
+from app.models.instance_resource_group import InstanceResourceGroup
 
 
 log = get_logger()
@@ -27,7 +28,8 @@ class InstanceResourceGroupService(object):
     def get(cls, group_id):
         user_id = request.cookies.get('user_id')
         log.info("list group(id=%s) for user: %s", group_id, user_id)
-        group = DBInstanceResourceGroup.find_by(id=group_id, user_id=user_id)
+        # group = DBInstanceResourceGroup.find_by(id=group_id, user_id=user_id)
+        group = InstanceResourceGroup.get_by_id(group_id)
         return group
 
     @classmethod
