@@ -37,7 +37,7 @@ def _create_facade(options):
 
 def _check_facade():
     if _FACADE is None:
-        msg = _("***The Database has not been setup!!!***")
+        msg = "***The Database has not been setup!!!***"
         LOG.exception(msg)
         raise RuntimeError(msg)
 
